@@ -1,0 +1,28 @@
+package com.springbook.ioc.injection;
+
+import java.util.List;
+
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+
+import polymorphism.TV;
+
+public class CollectionBeanClient {
+
+	public static void main(String[] args) {
+		
+		// 1. Spring 컨테이너를 구동한다.
+		AbstractApplicationContext factory = new GenericXmlApplicationContext("applicationContext.xml");
+
+		// 2. Spring 컨테이너로부터 필요한 객체를 요청(Lookup)한다.
+		CollectionBean bean = (CollectionBean) factory.getBean("collectionBean");
+		List<String> addressList = bean.getAddress();
+		for(String address : addressList) {
+			System.out.println(address.toString());
+		}
+		
+		factory.close();
+
+	}
+
+}
